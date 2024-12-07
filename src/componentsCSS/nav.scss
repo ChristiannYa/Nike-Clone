@@ -1,0 +1,84 @@
+.topnav {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+   @media not all and (min-width: theme('screens.sm')) {
+      @apply px-10 py-4;
+   }
+
+   button {
+      background: none;
+      border: none;
+      padding: 0.5rem;
+
+      // Greater than or equal to 'sm'
+      @media (min-width: theme('screens.sm')) {
+         display: none;
+      }
+   }
+
+   // When the menu is open
+   &__open[aria-expanded='true'] {
+      + .topnav__menu {
+         translate: 0;
+      }
+   }
+
+   &__close {
+      display: block;
+      margin-inline-start: auto;
+      margin-block-end: 8rem;
+
+      img {
+         width: 38px;
+      }
+   }
+
+   &__menu {
+      // Less than or equal to 'sm'
+      @media not all and (min-width: theme('screens.sm')) {
+         @apply bg-accent-2;
+         border-radius: 0.2rem;
+         translate: 100vh 0;
+         transition: translate 0.5s ease-in-out;
+
+         inset: 1rem;
+         padding: 1.5rem;
+
+         position: fixed;
+      }
+   }
+
+   // Links wrapper
+   &__links {
+      margin: 0;
+      padding: 0;
+      gap: 2rem;
+
+      display: flex;
+      align-items: center;
+
+      // Less than or equal to 'sm'
+      @media not all and (min-width: theme('screens.sm')) {
+         flex-direction: column;
+         gap: 2rem 0;
+      }
+   }
+
+   &__item {
+      list-style-type: none;
+   }
+
+   &__link {
+      @apply font-montserrat leading-normal text-lg text-slate-gray;
+
+      @media not all and (min-width: theme('screens.sm')) {
+         color: white;
+      }
+   }
+
+   &__link:hover {
+      @apply text-accent-2;
+   }
+}
