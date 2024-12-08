@@ -4,13 +4,12 @@
    align-items: center;
 
    @media not all and (min-width: theme('screens.sm')) {
-      @apply px-10 py-4;
+      @apply px-10 py-6;
    }
 
    button {
       background: none;
       border: none;
-      padding: 0.5rem;
 
       // Greater than or equal to 'sm'
       @media (min-width: theme('screens.sm')) {
@@ -28,25 +27,36 @@
    &__close {
       display: block;
       margin-inline-start: auto;
-      margin-block-end: 8rem;
+      margin-block-end: 3rem;
 
       img {
-         width: 38px;
+         width: 28px;
       }
    }
 
    &__menu {
       // Less than or equal to 'sm'
       @media not all and (min-width: theme('screens.sm')) {
-         @apply bg-accent-2;
-         border-radius: 0.2rem;
-         translate: 100vh 0;
+         @apply bg-accent-2 px-10 py-6;
+         translate: 100vw 0;
          transition: translate 0.5s ease-in-out;
 
-         inset: 1rem;
-         padding: 1.5rem;
+         width: 33vw;
+         inset: 0;
 
+         justify-self: end;
          position: fixed;
+      }
+
+      // Larger screens
+      @media (min-width: theme('screens.sm')) {
+         position: static;
+         width: auto;
+         background: none;
+
+         .topnav__close {
+            display: none;
+         }
       }
    }
 
@@ -62,7 +72,13 @@
       // Less than or equal to 'sm'
       @media not all and (min-width: theme('screens.sm')) {
          flex-direction: column;
+         align-items: end;
          gap: 2rem 0;
+      }
+
+      @media (min-width: theme('screens.sm')) {
+         position: relative;
+         z-index: 1;
       }
    }
 
@@ -80,5 +96,23 @@
 
    &__link:hover {
       @apply text-accent-2;
+
+      @media not all and (min-width: theme('screens.sm')) {
+         @apply text-white underline;
+      }
+   }
+}
+
+.blur-backdrop {
+   position: fixed;
+   inset: 0;
+   z-index: 30;
+   backdrop-filter: blur(5px);
+   background-color: rgba(255, 255, 255, 0.3);
+   opacity: 0;
+   transition: opacity 0.3s ease;
+
+   &.active {
+      opacity: 1;
    }
 }

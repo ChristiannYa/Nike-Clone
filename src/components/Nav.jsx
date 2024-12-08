@@ -12,85 +12,122 @@ const Nav = () =>
 {
    useEffect(() =>
    {
+      // DOM element selections
       const btnOpen = document.querySelector('#btnOpenNav');
       const btnClose = document.querySelector('#btnCloseNav');
+      const topNavMenu = document.querySelector('.topnav__menu');
+      const main = document.querySelector('main');
 
-      // Take the Tailwind config file and process it to get a complete 
-      // configuration object with all default and custom values
+      // Breakpoint setup
       const fullConfig = resolveConfig(tailwindConfig);
-
-      // Extract the 'sm' breakpoint value from the processed config
       const mdBreakpoint = fullConfig.theme.screens.sm;
       const media = window.matchMedia(`(width < ${mdBreakpoint})`);
-      const topNavMenu = document.querySelector('.topnav__menu');
-
-      const main = document.querySelector('main');
 
       const setupTopNav = (e) =>
       {
          if (e.matches)
          {
-            // Is mobile
-            // console.log('is mobile');
-            topNavMenu.setAttribute('innert', '');
+            // Mobile view
+            topNavMenu.setAttribute('inert', '');
             topNavMenu.style.transition = 'none';
+            topNavMenu.setAttribute('role', 'dialog');
+
+            const navLinks = document.querySelectorAll('.topnav__link');
+            navLinks.forEach(link =>
+            {
+               link.addEventListener('click', mobileMenuClick);
+            });
          } else
          {
-            // Is desktop
-            // console.log('is desktop')
-            topNavMenu.removeAttribute('innert');
+            // Desktop view
+            topNavMenu.removeAttribute('inert');
+            topNavMenu.removeAttribute('role');
+            topNavMenu.removeAttribute('style');
+            main.removeAttribute('inert');
 
-            // Close the menu is it is open
-            // while switching from mobile to desktop
-            closeMobileMenu();
+            // Remove any existing overlay
+            const overlay = document.querySelector('.blur-backdrop');
+            if (overlay)
+            {
+               overlay.remove();
+            }
+
+            const navLinks = document.querySelectorAll('.topnav__link');
+            navLinks.forEach(link =>
+            {
+               link.removeEventListener('click', mobileMenuClick);
+            });
          }
-      }
+      };
 
       const openMobileMenu = () =>
       {
+         if (topNavMenu.style.transition !== 'none')
+         {
+            return;
+         }
+
+         // Remove existing overlay
+         const existingOverlay = document.querySelector('.blur-backdrop');
+         if (existingOverlay)
+         {
+            existingOverlay.remove();
+         }
+
+         const overlay = document.createElement('div');
+         overlay.classList.add('blur-backdrop');
+         document.body.appendChild(overlay);
+
+         overlay.offsetHeight;
+         overlay.classList.add('active');
+
          btnOpen.setAttribute('aria-expanded', 'true');
-         topNavMenu.removeAttribute('innert');
+         topNavMenu.removeAttribute('inert');
          topNavMenu.removeAttribute('style');
-         main.setAttribute('innert', '');
+         main.setAttribute('inert', '');
          disableBodyScroll(topNavMenu);
          btnClose.focus();
-      }
+      };
 
       const closeMobileMenu = () =>
       {
+         // Remove blur overlay
+         const overlay = document.querySelector('.blur-backdrop');
+         if (overlay)
+         {
+            overlay.classList.remove('active');
+            setTimeout(() => overlay.remove(), 300);
+         }
+
          btnOpen.setAttribute('aria-expanded', 'false');
-         topNavMenu.setAttribute('innert', '');
-         main.removeAttribute('innert');
+         topNavMenu.setAttribute('inert', '');
+         main.removeAttribute('inert');
          enableBodyScroll(topNavMenu);
+         document.body.style.overflow = '';
          btnOpen.focus();
 
          setTimeout(() =>
          {
             topNavMenu.style.transition = 'none';
          }, 500);
-      }
+      };
 
       const mobileMenuClick = (e) =>
       {
          if (media.matches)
          {
-            // Close the menu first
+            e.preventDefault();
             closeMobileMenu();
 
             const href = e.currentTarget.getAttribute('href');
-
-            // Small delay to allow menu to close
             setTimeout(() =>
             {
                window.location.href = href;
             }, 50);
-
-            e.preventDefault();
          }
-      }
+      };
 
-      // Clicked link auto adjustment //
-      function adjustPageSpacing()
+      const adjustPageSpacing = () =>
       {
          const header = document.querySelector('header');
          const navHeight = header.offsetHeight;
@@ -100,10 +137,12 @@ const Nav = () =>
          {
             section.style.scrollMarginTop = `${navHeight + 5}px`;
          });
-      }
+      };
 
+      // Initial setup
       adjustPageSpacing();
 
+      // Event listeners
       let resizeTimer;
       window.addEventListener('resize', () =>
       {
@@ -111,24 +150,12 @@ const Nav = () =>
          resizeTimer = setTimeout(adjustPageSpacing, 100);
       });
 
-      // Click handlers to all nav links
-      const navLinks = document.querySelectorAll('.topnav__link');
-      navLinks.forEach(link =>
-      {
-         link.addEventListener('click', mobileMenuClick);
-      })
-
       setupTopNav(media);
-
       btnOpen.addEventListener('click', openMobileMenu);
       btnClose.addEventListener('click', closeMobileMenu);
+      media.addEventListener('change', setupTopNav);
 
-      media.addEventListener('change', function (e)
-      {
-         setupTopNav(e);
-      })
-
-      // Cleanup function to remove event listeners and enable scroll when component unmounts
+      // Cleanup
       return () =>
       {
          btnOpen.removeEventListener('click', openMobileMenu);
@@ -136,12 +163,12 @@ const Nav = () =>
          media.removeEventListener('change', setupTopNav);
          enableBodyScroll(topNavMenu);
 
-         navLinks.forEach(link =>
+         const navLinkElements = document.querySelectorAll('.topnav__link');
+         navLinkElements.forEach(link =>
          {
             link.removeEventListener('click', mobileMenuClick);
-         })
-      }
-
+         });
+      };
    }, []);
 
    return (
@@ -157,7 +184,7 @@ const Nav = () =>
                <img src={hamburger} width={32} height={32} />
             </button>
 
-            <div className="topnav__menu z-50" role='dialog' aria-labelledby='nav-label'>
+            <div className="topnav__menu z-50" aria-labelledby='nav-label'>
                <button id="btnCloseNav" aria-label='Close' className="topnav__close">
                   <img src={closeMenu} width={32} height={32} />
                </button>
