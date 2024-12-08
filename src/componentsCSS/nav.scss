@@ -37,11 +37,11 @@
    &__menu {
       // Less than or equal to 'sm'
       @media not all and (min-width: theme('screens.sm')) {
-         @apply bg-accent-2 px-10 py-6;
+         @apply bg-accent-2 pr-10 pt-6;
          translate: 100vw 0;
          transition: translate 0.5s ease-in-out;
 
-         width: 40%;
+         width: 240px;
          inset: 0;
 
          margin-left: auto;
@@ -97,10 +97,12 @@
    }
 
    &__link:hover {
-      @apply text-accent-2;
+      @media (hover: hover) {
+         @apply text-accent-2;
 
-      @media not all and (min-width: theme('screens.sm')) {
-         @apply text-white underline;
+         @media not all and (min-width: theme('screens.sm')) {
+            @apply text-white underline;
+         }
       }
    }
 }
