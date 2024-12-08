@@ -41,10 +41,10 @@
          translate: 100vw 0;
          transition: translate 0.5s ease-in-out;
 
-         width: 33vw;
+         width: 40vw;
          inset: 0;
 
-         justify-self: end;
+         margin-left: auto;
          position: fixed;
       }
 
@@ -90,7 +90,9 @@
       @apply font-montserrat leading-normal text-lg text-slate-gray;
 
       @media not all and (min-width: theme('screens.sm')) {
-         color: white;
+         @apply text-white;
+         font-size: 1.5rem;
+         padding: 0.5rem;
       }
    }
 
