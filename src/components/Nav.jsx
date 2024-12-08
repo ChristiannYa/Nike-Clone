@@ -173,7 +173,7 @@ const Nav = () =>
 
    return (
       <header className='topnav wrapper bg-white m-auto w-full z-50 px-11 py-8 sticky top-0'>
-         <a href="/">
+         <a href="/" className='z-50'>
             <img src={headerLogo} alt="Logo" width={130} height={29} />
          </a>
 
