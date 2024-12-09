@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 const ServiceCard = ({ imgURL, label, subtext }) =>
 {
    return (
-      <div className="hidden-siblings flex-1 w-full rounded-[20px] shadow-3xl px-10 py-16 max-sm:p-5">
+      <div className="hidden-siblings max-sm:w-[100%] sm:w-[250px] rounded-[20px] shadow-3xl sm:px-4 md:px-8 sm:py-8 max-sm:p-6">
          <div className="w-11 h-11 flex justify-center items-center bg-accent-2 rounded-full">
             <img
                src={imgURL}
@@ -12,7 +12,7 @@ const ServiceCard = ({ imgURL, label, subtext }) =>
                height={24}
             />
          </div>
-         <h3 className="mt-5 font-palanquin text-3xl leading-normal font-bold">
+         <h3 className="mt-5 font-palanquin text-2xl leading-normal font-bold">
             {label}
          </h3>
          <p className="mt-3 break-words font-montserrat text-lg leading-normal text-slate-gray">

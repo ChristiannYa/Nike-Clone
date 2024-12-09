@@ -59,7 +59,7 @@ const SuperQuality = () =>
          const { isSmall } = context.conditions;
 
          gsap.fromTo('#superQuality-img', {
-            scale: 0.7,
+            scale: 0.6,
             x: 0,
             rotation: 120,
          },
@@ -72,7 +72,7 @@ const SuperQuality = () =>
                scrollTrigger: {
                   trigger: '#superQuality-img',
                   // Small devices : Large devices
-                  start: isSmall ? 'top 80%' : 'top 30%',
+                  start: isSmall ? 'top 90%' : 'top 50%',
                   end: 'bottom center',
                   toggleActions: 'restart none resume reset',
                   // markers: true,

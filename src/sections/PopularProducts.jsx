@@ -29,7 +29,7 @@ const PopularProducts = () =>
 
    return (
       <section id="products" className="max-sm:mt-12">
-         <div className="flex flex-col justify-start gap-5">
+         <div className="flex flex-col justify-start gap-5 sm:px-16 px-8">
             <h2 className="text-4xl font-palanquin font-bold">
                Our <span className="text-accent-2">Popular</span> Products
             </h2>
@@ -40,7 +40,7 @@ const PopularProducts = () =>
             </p>
          </div>
 
-         <div ref={popularsRef} id="popularsCarousel" className="hidden-siblings mt-16 flex gap-8 overflow-x-scroll snap-x popularScrollbar-container">
+         <div ref={popularsRef} id="popularsCarousel" className="hidden-siblings mt-16 flex gap-8 overflow-x-scroll snap-x snap-mandatory scroll-smooth popularScrollbar-container px-8">
             {products.map((product) => (
                <PopularProductCard key={product.name} {...product} />
             ))}

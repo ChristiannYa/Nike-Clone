@@ -19,7 +19,7 @@ const App = () => (
             <Hero />
          </section>
 
-         <section className="padding">
+         <section className='sm:py-24 py-12'>
             <PopularProducts />
          </section>
 
@@ -27,7 +27,7 @@ const App = () => (
             <SuperQuality />
          </section>
 
-         <section className="padding-x py-10">
+         <section className="px-8 py-10">
             <Services />
          </section>
 

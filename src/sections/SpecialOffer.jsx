@@ -34,7 +34,7 @@ const SpecialOffer = () =>
    }, [])
 
    return (
-      <section className="flex justify-wrap items-center max-xl:flex-col-reverse gap-10 max-container">
+      <section id="special-offer" className="flex justify-wrap items-center max-xl:flex-col-reverse gap-10 max-container">
          <div>
             <img src={offer} width={773} height={687} className="object-contain w-full" />
          </div>

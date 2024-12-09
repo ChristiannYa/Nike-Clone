@@ -111,7 +111,7 @@ const Services = () =>
    }, []);
 
    return (
-      <section ref={servicesRef} className="max-container flex justify-center flex-wrap gap-9">
+      <section ref={servicesRef} className="flex justify-center flex-wrap gap-6">
          {services.map((service) => (
             <ServiceCard key={service.label} {...service} />
          ))}
