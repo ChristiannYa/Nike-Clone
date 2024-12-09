@@ -28,6 +28,7 @@ export default {
          },
          boxShadow: {
             '3xl': '0 10px 40px rgba(0, 0, 0, 0.1)',
+            '4xl': '-15px 0px 15px 0px rgba(137, 127, 189, 1)',
          },
          backgroundImage: {
             hero: "url('assets/images/collection-background.svg')",

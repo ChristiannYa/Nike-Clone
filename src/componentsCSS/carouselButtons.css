@@ -82,6 +82,6 @@
    outline: none;
 }
 
-button.pushable[disabled] {
+/* button.pushable[disabled] {
    opacity: 0.6;
-}
+} */

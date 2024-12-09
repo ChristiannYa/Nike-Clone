@@ -2,7 +2,7 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   transition: transform 0.3s ease;
+   transition: transform 0.3s ease-in-out;
 
    @media not all and (min-width: theme('screens.lg')) {
       @apply px-10 py-6;
@@ -46,12 +46,9 @@
    &__open[aria-expanded='true'] {
       + .topnav__menu {
          translate: 0;
-      }
-
-      + .topnav__menu {
-         -webkit-box-shadow: -20px 0px 35px 0px rgba(137, 127, 189, 1);
-         -moz-box-shadow: -20px 0px 35px 0px rgba(137, 127, 189, 1);
-         box-shadow: -20px 0px 35px 0px rgba(137, 127, 189, 1);
+         -webkit-box-shadow: theme('boxShadow.4xl');
+         -moz-box-shadow: theme('boxShadow.4xl');
+         box-shadow: theme('boxShadow.4xl');
       }
    }
 
@@ -70,7 +67,7 @@
       @media not all and (min-width: theme('screens.lg')) {
          @apply bg-accent-2 px-8 pt-6;
          translate: 100% 0;
-         transition: translate 0.5s ease-in-out;
+         transition: translate 0.3s ease-in-out;
 
          width: fit-content;
          height: 100vh;
@@ -136,7 +133,7 @@
    position: fixed;
    inset: 0;
    z-index: 997;
-   backdrop-filter: blur(3px);
+   backdrop-filter: blur(2px);
    background-color: rgba(255, 255, 255, 0.5);
    opacity: 0;
    transition: opacity 0.5s ease;
